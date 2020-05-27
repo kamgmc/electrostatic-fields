@@ -1,0 +1,21 @@
+ion-content {
+  ion-list {
+    ion-list-header {
+      font-weight: bold;
+    }
+  }
+
+  ion-avatar {
+    ion-icon {
+      font-size: 2.5em;
+
+      &.positive {
+        color: #cf3c4f;
+      }
+
+      &.negative {
+        color: #5d58e0;
+      }
+    }
+  }
+}

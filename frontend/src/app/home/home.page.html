@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Campo electrostácico
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nueva carga</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formGroup">
+        <ion-item>
+          <ion-label position="floating">Valor de la carga</ion-label>
+          <ion-input formControlName="q" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Posicion en X</ion-label>
+          <ion-input formControlName="x" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Posicion en Y</ion-label>
+          <ion-input formControlName="y" type="number"></ion-input>
+        </ion-item>
+      </form>
+      <ion-button expand="block" (click)="addCharge()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Agregar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-list-header *ngIf="charges.length <= 0">
+      <ion-label>Aun no has agregado cargas</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let charge of charges; let i = index">
+      <ion-avatar slot="start">
+        <ng-container *ngIf="charge.q >= 0; else negative">
+          <ion-icon class="positive" name="add-circle"></ion-icon>
+        </ng-container>
+        <ng-template #negative>
+          <ion-icon class="negative" name="remove-circle"></ion-icon>
+        </ng-template>
+      </ion-avatar>
+      <ion-label>{{charge.q}} en ({{charge.x}}, {{charge.y}})</ion-label>
+      <ion-icon slot="end" name="close-circle" class="pointer" (click)="removeCharge(i)"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-button color="success" expand="block" (click)="graph()">
+    <ion-icon slot="start" name="color-wand"></ion-icon>
+    Graficar
+  </ion-button>
+</ion-content>
